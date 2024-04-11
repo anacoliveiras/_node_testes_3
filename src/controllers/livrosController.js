@@ -1,4 +1,4 @@
-import Livro from '../models/livro.js';
+import Livro from "../models/livro.js";
 
 class LivrosController {
   static listarLivros = async (_, res) => {
@@ -25,7 +25,7 @@ class LivrosController {
     const livro = new Livro(body);
     try {
       const resposta = await livro.salvar(livro);
-      return res.status(201).json({ message: 'livro criado', content: resposta });
+      return res.status(201).json({ message: "livro criado", content: resposta });
     } catch (err) {
       return res.status(500).json(err.message);
     }
@@ -38,7 +38,7 @@ class LivrosController {
       const livroAtual = await Livro.pegarPeloId(params.id);
       const novoLivro = new Livro({ ...livroAtual, ...body });
       const resposta = await novoLivro.salvar(novoLivro);
-      return res.status(200).json({ message: 'livro atualizado', content: resposta });
+      return res.status(200).json({ message: "livro atualizado", content: resposta });
     } catch (err) {
       return res.status(500).json(err.message);
     }
@@ -48,7 +48,7 @@ class LivrosController {
     const { params } = req;
     try {
       await Livro.excluir(params.id);
-      return res.status(200).json({ message: 'livro excluído' });
+      return res.status(200).json({ message: "livro excluído" });
     } catch (err) {
       return res.status(500).json(err.message);
     }

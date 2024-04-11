@@ -1,28 +1,27 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    es2021: true
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ["airbnb-base", "prettier"],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+    ecmaVersion: "latest",
+    sourceType: "module"
   },
+  plugins: ["prettier"],
   rules: {
-    'import/extensions': 0,
-    'prefer-destructuring': 0,
-    'no-underscore-dangle': 0,
+    "prettier/prettier": "error",
+    "import/extensions": 0,
+    "prefer-destructuring": 0,
+    "no-underscore-dangle": 0,
+    quotes: ["error", "double"]
   },
   overrides: [
     {
-      files: [
-        '*.test.js',
-      ],
+      files: ["*.test.js"],
       env: {
-        jest: true,
-      },
-    },
-  ],
+        jest: true
+      }
+    }
+  ]
 };

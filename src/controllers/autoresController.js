@@ -1,4 +1,4 @@
-import Autor from '../models/autor.js';
+import Autor from "../models/autor.js";
 
 class AutoresController {
   static listarAutores = async (_, res) => {
@@ -25,7 +25,7 @@ class AutoresController {
     const autor = new Autor(body);
     try {
       const resposta = await autor.salvar(autor);
-      return res.status(201).json({ message: 'autor criado', content: resposta });
+      return res.status(201).json({ message: "autor criado", content: resposta });
     } catch (err) {
       return res.status(500).json(err.message);
     }
@@ -38,7 +38,7 @@ class AutoresController {
       const autorAtual = await Autor.pegarPeloId(params.id);
       const novoAutor = new Autor({ ...autorAtual, ...body });
       const resposta = await novoAutor.salvar(novoAutor);
-      return res.status(200).json({ message: 'autor atualizado', content: resposta });
+      return res.status(200).json({ message: "autor atualizado", content: resposta });
     } catch (err) {
       return res.status(500).json(err.message);
     }
@@ -48,7 +48,7 @@ class AutoresController {
     const { params } = req;
     try {
       await Autor.excluir(params.id);
-      return res.status(200).json({ message: 'autor excluído' });
+      return res.status(200).json({ message: "autor excluído" });
     } catch (err) {
       return res.status(500).json(err.message);
     }

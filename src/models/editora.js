@@ -1,16 +1,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable camelcase */
-import db from '../db/dbconfig.js';
+import db from "../db/dbconfig.js";
 
 class Editora {
-  constructor({
-    id,
-    nome,
-    cidade,
-    email,
-    created_at,
-    updated_at,
-  }) {
+  constructor({ id, nome, cidade, email, created_at, updated_at }) {
     this.id = null || id;
     this.nome = nome;
     this.cidade = cidade;
@@ -20,35 +13,33 @@ class Editora {
   }
 
   static async pegarEditoras() {
-    return db.select('*').from('editoras');
+    return db.select("*").from("editoras");
   }
 
   static async pegarPeloId(id) {
-    const resultado = await db.select('*').from('editoras').where({ id });
+    const resultado = await db.select("*").from("editoras").where({ id });
     return resultado[0];
   }
 
   async criar() {
-    return db('editoras').insert(this)
-      .then((registroCriado) => db('editoras')
-        .where('id', registroCriado[0]))
-      .then((registroSelecionado) => new Editora(registroSelecionado[0]));
+    return db("editoras")
+      .insert(this)
+      .then(registroCriado => db("editoras").where("id", registroCriado[0]))
+      .then(registroSelecionado => new Editora(registroSelecionado[0]));
   }
 
   async atualizar(id) {
     // o update retorna a quantidade de rows atualizados e não o objeto do registro atualizado
-    await db('editoras')
+    await db("editoras")
       .where({ id })
       .update({ ...this, updated_at: new Date().toISOString() });
 
-    return db.select('*').from('editoras').where({ id });
+    return db.select("*").from("editoras").where({ id });
   }
 
   static async excluir(id) {
     // o del retorna a quantidade de rows deletados
-    await db('editoras')
-      .where({ id })
-      .del();
+    await db("editoras").where({ id }).del();
   }
 
   async salvar() {
@@ -62,8 +53,7 @@ class Editora {
   }
 
   static async pegarLivrosPorEditora(editoraId) {
-    return db('livros')
-      .where({ editora_id: editoraId });
+    return db("livros").where({ editora_id: editoraId });
   }
 }
 
